@@ -2,37 +2,46 @@
   'use strict';
 
   const root = document.documentElement;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   const WA_NUMBER = '919288270459';
-  const WA_GREETING = 'Hi Vikash, I want a website from WebChai';
 
   /* ---------- Theme toggle ---------- */
   const themeBtn = document.querySelector('.theme-toggle');
   const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-  const currentTheme = () => root.dataset.theme || (darkQuery.matches ? 'dark' : 'light');
-
   const syncTheme = () => {
-    const isDark = currentTheme() === 'dark';
+    const isDark = root.dataset.theme !== 'light';
     themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0C4644' : '#0E5A57');
+    if (themeMeta) themeMeta.setAttribute('content', isDark ? '#08090C' : '#FAFAF7');
   };
 
   themeBtn.addEventListener('click', () => {
-    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
     root.dataset.theme = next;
     try { localStorage.setItem('webchai-theme', next); } catch (e) { /* storage unavailable */ }
     syncTheme();
   });
-  darkQuery.addEventListener('change', syncTheme);
   syncTheme();
 
-  /* ---------- Header shadow ---------- */
+  /* ---------- Header, progress bar, floating WhatsApp ---------- */
   const header = document.querySelector('.site-header');
-  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
-  window.addEventListener('scroll', onScroll, { passive: true });
+  const progress = document.querySelector('.scroll-progress');
+  const floatWa = document.querySelector('.float-wa');
+  let ticking = false;
+
+  const onScroll = () => {
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    header.classList.toggle('is-scrolled', y > 8);
+    if (progress) progress.style.setProperty('--progress', max > 0 ? (y / max).toFixed(4) : 0);
+    if (floatWa) floatWa.classList.toggle('is-shown', y > window.innerHeight * 0.8);
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
   onScroll();
 
   /* ---------- Mobile nav ---------- */
@@ -58,12 +67,15 @@
       navToggle.focus();
     }
   });
-  window.matchMedia('(min-width: 1000px)').addEventListener('change', (e) => { if (e.matches) setNav(false); });
+  window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) setNav(false); });
 
-  /* ---------- Scrollspy ---------- */
-  const navLinks = [...nav.querySelectorAll('a[href^="#"]')];
+  /* ---------- Hero title stagger ---------- */
+  document.querySelectorAll('.hero-title .word').forEach((w, i) => w.style.setProperty('--i', i));
+
   const hasIO = 'IntersectionObserver' in window;
 
+  /* ---------- Scrollspy ---------- */
+  const navLinks = [...nav.querySelectorAll('a[href^="#"]:not(.btn)')];
   if (hasIO) {
     const spy = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -77,7 +89,6 @@
         }
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-
     navLinks.forEach((a) => {
       const section = document.querySelector(a.getAttribute('href'));
       if (section) spy.observe(section);
@@ -86,8 +97,7 @@
 
   /* ---------- Reveal on scroll ---------- */
   const reveals = document.querySelectorAll('.reveal');
-
-  if (!hasIO || reduceMotion.matches) {
+  if (!hasIO || reduceMotion) {
     reveals.forEach((el) => el.classList.add('is-visible'));
   } else {
     const io = new IntersectionObserver((entries, obs) => {
@@ -97,58 +107,134 @@
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     reveals.forEach((el) => io.observe(el));
   }
 
-  /* ---------- Typing demo ---------- */
-  const typeEl = document.querySelector('.type-text');
+  /* ---------- Hero browser: cycles through example sites ---------- */
+  const browser = document.querySelector('.hero-visual .browser');
+  if (browser) {
+    const sites = [
+      { url: 'aurelia-jewels.com', kicker: 'New collection', title: 'Timeless pieces, made to last.', cta: 'Shop now' },
+      { url: 'olive-and-ember.co', kicker: 'Book a table', title: 'Wood-fired, every night.', cta: 'Reserve' },
+      { url: 'northgate-homes.com', kicker: 'Find your home', title: 'Homes worth coming back to.', cta: 'View listings' }
+    ];
+    const urlEl = browser.querySelector('.url-text');
+    const kickerEl = browser.querySelector('.mock-kicker');
+    const titleEl = browser.querySelector('.mock-h');
+    const ctaEl = browser.querySelector('.mock-cta');
+    let idx = 0;
 
-  if (typeEl && !reduceMotion.matches) {
-    const full = typeEl.dataset.text || typeEl.textContent;
-    let i = 0;
-    let deleting = false;
-
-    const tick = () => {
-      typeEl.textContent = full.slice(0, i);
-      let delay = deleting ? 55 : 120;
-
-      if (!deleting && i === full.length) {
-        deleting = true;
-        delay = 1700;
-      } else if (deleting && i === 0) {
-        deleting = false;
-        delay = 600;
-      } else {
-        i += deleting ? -1 : 1;
-      }
-      setTimeout(tick, delay);
+    const show = (i) => {
+      const s = sites[i];
+      browser.dataset.site = String(i);
+      urlEl.textContent = s.url;
+      kickerEl.textContent = s.kicker;
+      titleEl.textContent = s.title;
+      ctaEl.textContent = s.cta;
+      browser.classList.remove('is-building');
+      void browser.offsetWidth; // restart animation
+      browser.classList.add('is-building');
     };
-    tick();
+
+    if (!reduceMotion) {
+      setInterval(() => {
+        if (document.hidden) return;
+        idx = (idx + 1) % sites.length;
+        show(idx);
+      }, 4200);
+    }
   }
 
-  /* ---------- Hover lift demo ---------- */
-  const liftDemo = document.querySelector('.demo-lift');
+  /* ---------- White-label brand swap ---------- */
+  const bsWindow = document.querySelector('.bs-window');
+  if (bsWindow && !reduceMotion) {
+    const brands = [
+      { name: 'Your Agency', domain: 'youragency.com' },
+      { name: 'Northwind Studio', domain: 'northwind.studio' },
+      { name: 'Redline Digital', domain: 'redline.digital' },
+      { name: 'Bluepeak Media', domain: 'bluepeak.media' }
+    ];
+    const names = bsWindow.querySelectorAll('.bs-name');
+    const domain = bsWindow.querySelector('.bs-domain');
+    let b = 0;
 
-  if (liftDemo) {
-    const card = liftDemo.querySelector('.lift-card');
-
-    liftDemo.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse' || reduceMotion.matches) return;
-      const r = liftDemo.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.setProperty('--rx', `${(-y * 20).toFixed(2)}deg`);
-      card.style.setProperty('--ry', `${(x * 24).toFixed(2)}deg`);
-    });
-    liftDemo.addEventListener('pointerleave', () => {
-      card.style.removeProperty('--rx');
-      card.style.removeProperty('--ry');
-    });
-    liftDemo.addEventListener('pointerup', (e) => {
-      if (e.pointerType !== 'mouse') liftDemo.classList.toggle('is-active');
-    });
+    setInterval(() => {
+      if (document.hidden) return;
+      b = (b + 1) % brands.length;
+      names.forEach((n) => n.classList.add('is-out'));
+      domain.classList.add('bs-name', 'is-out');
+      setTimeout(() => {
+        names.forEach((n) => { n.textContent = brands[b].name; n.classList.remove('is-out'); });
+        domain.textContent = brands[b].domain;
+        domain.classList.remove('is-out');
+        bsWindow.dataset.i = String(b);
+      }, 350);
+    }, 2600);
   }
+
+  /* ---------- Pointer effects (desktop only) ---------- */
+  if (finePointer && !reduceMotion) {
+    // Spotlight on cards
+    document.querySelectorAll('.spot').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--sx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--sy', `${e.clientY - r.top}px`);
+      });
+    });
+
+    // 3D tilt for mockups
+    document.querySelectorAll('.tilt').forEach((el) => {
+      const host = el.parentElement;
+      const base = getComputedStyle(el);
+      const rx0 = parseFloat(base.getPropertyValue('--rx')) || 0;
+      const ry0 = parseFloat(base.getPropertyValue('--ry')) || 0;
+      host.addEventListener('pointermove', (e) => {
+        const r = host.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.setProperty('--rx', `${(-y * 10).toFixed(2)}deg`);
+        el.style.setProperty('--ry', `${(x * 14).toFixed(2)}deg`);
+      });
+      host.addEventListener('pointerleave', () => {
+        el.style.setProperty('--rx', `${rx0}deg`);
+        el.style.setProperty('--ry', `${ry0}deg`);
+      });
+    });
+
+    // Magnetic buttons
+    document.querySelectorAll('.magnetic').forEach((btn) => {
+      btn.addEventListener('pointermove', (e) => {
+        const r = btn.getBoundingClientRect();
+        btn.style.setProperty('--mx', `${((e.clientX - r.left) / r.width - 0.5) * 10}px`);
+        btn.style.setProperty('--my', `${((e.clientY - r.top) / r.height - 0.5) * 8}px`);
+      });
+      btn.addEventListener('pointerleave', () => {
+        btn.style.setProperty('--mx', '0px');
+        btn.style.setProperty('--my', '0px');
+      });
+    });
+
+    // Subtle parallax on hero orbs
+    const orbs = document.querySelectorAll('.orb');
+    window.addEventListener('pointermove', (e) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      orbs.forEach((o, i) => {
+        const k = (i + 1) * 18;
+        o.style.translate = `${x * k}px ${y * k}px`;
+      });
+    }, { passive: true });
+  }
+
+  /* ---------- FAQ: one open at a time ---------- */
+  const faqs = document.querySelectorAll('.faq details');
+  faqs.forEach((d) => {
+    d.addEventListener('toggle', () => {
+      if (d.open) faqs.forEach((o) => { if (o !== d) o.open = false; });
+    });
+  });
 
   /* ---------- Copy number ---------- */
   const copyStatus = document.getElementById('copy-status');
@@ -176,7 +262,6 @@
     const label = btn.querySelector('.copy-label');
     const original = label.textContent;
     let timer;
-
     btn.addEventListener('click', async () => {
       const ok = await copyText(btn.dataset.copy);
       label.textContent = ok ? 'Copied!' : 'Copy failed';
@@ -191,33 +276,36 @@
     });
   });
 
-  /* ---------- Menu items preselect website type ---------- */
+  /* ---------- Links preselect project type / audience ---------- */
+  const form = document.getElementById('order-form');
   const typeSelect = document.getElementById('f-type');
   const nameInput = document.getElementById('f-name');
+  const nameError = document.getElementById('f-name-error');
 
-  document.querySelectorAll('a[data-type]').forEach((link) => {
+  const setAudience = (value) => {
+    const radio = form.querySelector(`input[name="audience"][value="${value}"]`);
+    if (radio) radio.checked = true;
+  };
+
+  document.querySelectorAll('a[data-type], a[data-audience]').forEach((link) => {
     link.addEventListener('click', () => {
-      if (typeSelect) {
+      if (link.dataset.type && typeSelect) {
         typeSelect.value = link.dataset.type;
         typeSelect.classList.add('is-highlighted');
         setTimeout(() => typeSelect.classList.remove('is-highlighted'), 1400);
       }
-      setTimeout(() => {
-        if (nameInput) nameInput.focus();
-      }, 400);
+      if (link.dataset.audience) setAudience(link.dataset.audience);
+      else if (link.dataset.type === 'White-label (for my agency)') setAudience('Agency');
+      setTimeout(() => nameInput.focus({ preventScroll: true }), 700);
     });
   });
 
-  /* ---------- Order form → WhatsApp ---------- */
-  const form = document.getElementById('order-form');
-  const nameError = document.getElementById('f-name-error');
-
+  /* ---------- Form → WhatsApp ---------- */
   const setNameError = (show) => {
     nameError.hidden = !show;
     if (show) nameInput.setAttribute('aria-invalid', 'true');
     else nameInput.removeAttribute('aria-invalid');
   };
-
   nameInput.addEventListener('input', () => { if (nameInput.value.trim()) setNameError(false); });
 
   form.addEventListener('submit', (e) => {
@@ -233,14 +321,26 @@
     }
     setNameError(false);
 
-    const lines = [`${WA_GREETING}.`, '', `Name: ${name}`];
-    if (value('business')) lines.push(`Business: ${value('business')}`);
-    if (value('type')) lines.push(`Website type: ${value('type')}`);
-    if (value('message')) lines.push(`Message: ${value('message')}`);
+    const isAgency = value('audience') === 'Agency';
+    const lines = [
+      isAgency
+        ? "Hi Vikash, I run an agency and I'm interested in white-label web development."
+        : "Hi Vikash, I'd like to discuss a website project.",
+      '',
+      `Name: ${name}`
+    ];
+    if (value('business')) lines.push(`${isAgency ? 'Agency' : 'Company'}: ${value('business')}`);
+    if (value('type')) lines.push(`Project type: ${value('type')}`);
+    if (value('budget')) lines.push(`Budget: ${value('budget')}`);
+    if (value('message')) lines.push(`Details: ${value('message')}`);
 
     const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
     const win = window.open(url, '_blank');
     if (win) win.opener = null;
     else window.location.href = url;
   });
+
+  /* ---------- Footer year ---------- */
+  const year = document.getElementById('year');
+  if (year) year.textContent = String(new Date().getFullYear());
 })();
