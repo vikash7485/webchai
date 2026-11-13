@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img" aria-label="Mockup of the Yuvashala Foundation website">
+  <defs>
+    <clipPath id="clip"><rect width="560" height="360" rx="16"/></clipPath>
+    <clipPath id="hero"><rect x="0" y="40" width="560" height="112"/></clipPath>
+    <clipPath id="strip"><rect x="0" y="152" width="560" height="20"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7FB7D6"/>
+      <stop offset=".55" stop-color="#9CC59A"/>
+      <stop offset="1" stop-color="#5E8F4E"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1A0B14" stop-opacity=".78"/>
+      <stop offset=".65" stop-color="#1A0B14" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#1A0B14" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <style>
+    text { font-family: Poppins, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .marq { animation: marq 9s linear infinite; }
+    @keyframes marq { to { transform: translateX(-280px); } }
+    .donate { transform-box: fill-box; transform-origin: center; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 50% { transform: scale(1.07); } }
+    .crowd { animation: sway 3s ease-in-out infinite alternate; }
+    .crowd2 { animation: sway 3.6s ease-in-out -1s infinite alternate; }
+    @keyframes sway { to { transform: translateY(-3px); } }
+    .fist { transform-box: fill-box; transform-origin: 50% 100%; animation: punch 2.4s ease-in-out infinite; }
+    .fist2 { animation-delay: -1.2s; }
+    @keyframes punch { 50% { transform: rotate(-10deg) translateY(-3px); } }
+    .stat { animation: rise 4.5s cubic-bezier(.2,.8,.2,1) infinite; }
+    .s2 { animation-delay: .2s; } .s3 { animation-delay: .4s; }
+    @keyframes rise { 0% { transform: translateY(14px); opacity: 0; } 20%, 88% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(0); opacity: 0; } }
+    .hl { transform-box: fill-box; transform-origin: 0 50%; animation: hl 4.5s ease-in-out infinite; }
+    .h2 { animation-delay: .3s; } .h3 { animation-delay: .6s; }
+    @keyframes hl { 0%, 10% { transform: scaleX(0); } 35%, 90% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+  </style>
+  <g clip-path="url(#clip)">
+    <rect width="560" height="360" fill="#FFFFFF"/>
+
+    <!-- header -->
+    <rect width="560" height="40" fill="#fff"/>
+    <rect y="39" width="560" height="1" fill="#EFEFF3"/>
+    <circle cx="26" cy="20" r="11" fill="#FFF4D6" stroke="#E8B53A" stroke-width="1.5"/>
+    <path d="M26 12.5l2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="#E8B53A"/>
+    <text x="43" y="20" font-weight="800" font-size="12" fill="#252525">Yuvaशala</text>
+    <text x="43" y="31" font-weight="600" font-size="5.6" letter-spacing="2" fill="#E72175">FOUNDATION</text>
+    <g font-weight="600" font-size="7" fill="#252525">
+      <text x="236" y="23" fill="#E72175">HOME</text>
+      <text x="264" y="23">WHO WE ARE</text>
+      <text x="314" y="23">PROGRAMS</text>
+      <text x="357" y="23">IMPACT</text>
+      <text x="390" y="23">ACHIEVEMENTS</text>
+      <text x="449" y="23">CONTACT</text>
+    </g>
+    <g class="donate">
+      <rect x="488" y="10" width="58" height="20" rx="10" fill="#E72175"/>
+      <text x="517" y="23.5" text-anchor="middle" font-weight="800" font-size="8" fill="#fff">DONATE</text>
+    </g>
+
+    <!-- hero photo (stylised) -->
+    <g clip-path="url(#hero)">
+      <rect x="0" y="40" width="560" height="112" fill="url(#sky)"/>
+      <g fill="#4E7A3F" opacity=".7">
+        <circle cx="430" cy="78" r="26"/><circle cx="470" cy="70" r="30"/><circle cx="515" cy="80" r="26"/><circle cx="550" cy="72" r="22"/>
+      </g>
+      <g class="crowd2">
+        <g fill="#3B2A2A">
+          <circle cx="250" cy="104" r="8"/><rect x="241" y="112" width="18" height="40" rx="7"/>
+          <circle cx="292" cy="100" r="8"/><rect x="283" y="108" width="18" height="44" rx="7"/>
+          <circle cx="334" cy="106" r="7.5"/><rect x="325" y="114" width="17" height="38" rx="7"/>
+          <circle cx="376" cy="101" r="8"/><rect x="367" y="109" width="18" height="43" rx="7"/>
+          <circle cx="418" cy="105" r="8"/><rect x="409" y="113" width="18" height="39" rx="7"/>
+          <circle cx="460" cy="100" r="8"/><rect x="451" y="108" width="18" height="44" rx="7"/>
+          <circle cx="502" cy="104" r="8"/><rect x="493" y="112" width="18" height="40" rx="7"/>
+        </g>
+      </g>
+      <g class="crowd">
+        <g fill="#5A3E36">
+          <circle cx="271" cy="116" r="8.5"/><rect x="261" y="125" width="20" height="30" rx="8" fill="#C0392B"/>
+          <circle cx="313" cy="118" r="8.5"/><rect x="303" y="127" width="20" height="28" rx="8" fill="#F1C40F"/>
+          <circle cx="355" cy="115" r="8.5"/><rect x="345" y="124" width="20" height="31" rx="8" fill="#2E86C1"/>
+          <circle cx="397" cy="119" r="8.5"/><rect x="387" y="128" width="20" height="27" rx="8" fill="#E72175"/>
+          <circle cx="439" cy="116" r="8.5"/><rect x="429" y="125" width="20" height="30" rx="8" fill="#ECF0F1"/>
+          <circle cx="481" cy="118" r="8.5"/><rect x="471" y="127" width="20" height="28" rx="8" fill="#27AE60"/>
+        </g>
+      </g>
+      <rect x="250" y="134" width="270" height="22" rx="3" fill="#E9F2FA"/>
+      <text x="262" y="149" font-weight="800" font-size="10" fill="#1A4F8B">Center of Rural Talent</text>
+      <rect x="0" y="40" width="560" height="112" fill="url(#shade)"/>
+      <text x="24" y="86" font-weight="800" font-size="16" fill="#fff">Every village has talent</text>
+      <text x="24" y="106" font-weight="800" font-size="16" fill="#FFD23F">— it just needs to be</text>
+      <text x="24" y="126" font-weight="800" font-size="16" fill="#FFD23F">discovered.</text>
+    </g>
+
+    <!-- sports marquee -->
+    <rect x="0" y="152" width="560" height="20" fill="#252525"/>
+    <g clip-path="url(#strip)">
+      <g class="marq" font-weight="700" font-size="8" letter-spacing="1.2" fill="#fff">
+        <text x="12" y="165">SPORTS  •  KABADDI  •  ATHLETICS  •  BOXING  •  FOOTBALL  •  SPORTS  •  KABADDI  •  ATHLETICS  •  BOXING  •  FOOTBALL  •  SPORTS  •  KABADDI</text>
+      </g>
+    </g>
+
+    <!-- who we are -->
+    <g class="fist">
+      <path d="M14 214c0-8 5-12 11-12h8c5 0 8 3 8 8v10c0 6-4 10-10 10h-7c-6 0-10-4-10-10z" fill="#FFD23F"/>
+      <path d="M20 206v8M27 205v9M34 206v8" stroke="#E8B53A" stroke-width="1.6" stroke-linecap="round"/>
+    </g>
+    <g class="fist fist2">
+      <path d="M520 220c0-8 5-12 11-12h8c5 0 8 3 8 8v10c0 6-4 10-10 10h-7c-6 0-10-4-10-10z" fill="#FFD23F"/>
+      <path d="M526 212v8M533 211v9M540 212v8" stroke="#E8B53A" stroke-width="1.6" stroke-linecap="round"/>
+    </g>
+    <text x="190" y="206" font-weight="900" font-size="34" fill="#8E1A63">#</text>
+    <text x="216" y="196" font-weight="900" font-size="16" fill="#252525">Who</text>
+    <text x="216" y="214" font-weight="900" font-size="16" fill="#252525">We Are</text>
+    <rect class="hl" x="130" y="226" width="110" height="5" rx="2.5" fill="#FFD23F"/>
+    <rect x="130" y="224" width="300" height="4" rx="2" fill="#252525" opacity=".22"/>
+    <rect class="hl h2" x="250" y="236" width="140" height="5" rx="2.5" fill="#F8B4D3"/>
+    <rect x="150" y="234" width="260" height="4" rx="2" fill="#252525" opacity=".22"/>
+    <rect class="hl h3" x="170" y="246" width="120" height="5" rx="2.5" fill="#FFD23F"/>
+    <rect x="170" y="244" width="220" height="4" rx="2" fill="#E72175" opacity=".45"/>
+
+    <!-- impact -->
+    <g class="stat">
+      <rect x="24" y="266" width="160" height="78" rx="12" fill="#FFF0F6"/>
+      <text x="38" y="300" font-weight="900" font-size="22" fill="#E72175">15,000+</text>
+      <text x="38" y="320" font-weight="600" font-size="8.5" fill="#5B5B66">Children &amp; youth reached</text>
+    </g>
+    <g class="stat s2">
+      <rect x="200" y="266" width="160" height="78" rx="12" fill="#EAF6FC"/>
+      <text x="214" y="300" font-weight="900" font-size="22" fill="#1198D9">2,400+</text>
+      <text x="214" y="320" font-weight="600" font-size="8.5" fill="#5B5B66">Youth trained</text>
+    </g>
+    <g class="stat s3">
+      <rect x="376" y="266" width="160" height="78" rx="12" fill="#1A1A1F"/>
+      <text x="390" y="300" font-weight="900" font-size="22" fill="#FFD23F">46+</text>
+      <text x="390" y="320" font-weight="600" font-size="8.5" fill="#C9C9D2">Medals won · Gold · Silver · Bronze</text>
+    </g>
+  </g>
+</svg>
