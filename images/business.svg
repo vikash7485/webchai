@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Illustration of a business website bringing in more enquiries">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1C2230"/>
+      <stop offset="1" stop-color="#0E1117"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC34D"/>
+      <stop offset="1" stop-color="#F5A524"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".8" cy=".2" r=".7">
+      <stop offset="0" stop-color="#F5A524" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#F5A524" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip"><rect width="480" height="300" rx="22"/></clipPath>
+  </defs>
+  <style>
+    .float { animation: float 5s ease-in-out infinite; }
+    .float2 { animation: float 6s ease-in-out -2s infinite; }
+    @keyframes float { 50% { transform: translateY(-7px); } }
+    .b { transform-box: fill-box; transform-origin: 50% 100%; animation: grow 3.6s cubic-bezier(.2,.8,.2,1) infinite; }
+    .b2 { animation-delay: .15s; } .b3 { animation-delay: .3s; } .b4 { animation-delay: .45s; } .b5 { animation-delay: .6s; }
+    @keyframes grow { 0% { transform: scaleY(.15); } 35%, 85% { transform: scaleY(1); } 100% { transform: scaleY(.15); } }
+    .trend { stroke-dasharray: 220; animation: draw 3.6s cubic-bezier(.2,.8,.2,1) infinite; }
+    @keyframes draw { 0% { stroke-dashoffset: 220; } 40%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 220; } }
+    .ping { transform-box: fill-box; transform-origin: center; animation: ping 1.8s ease-out infinite; }
+    @keyframes ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3); opacity: 0; } }
+    .cursor { animation: cur 3.6s ease-in-out infinite; }
+    @keyframes cur { 0%, 20% { transform: translate(0, 0); } 45%, 60% { transform: translate(-58px, -22px); } 62% { transform: translate(-58px, -20px) scale(.9); } 100% { transform: translate(0, 0); } }
+  </style>
+  <g clip-path="url(#clip)">
+    <rect width="480" height="300" fill="url(#bg)"/>
+    <rect width="480" height="300" fill="url(#glow)"/>
+    <g opacity=".07" stroke="#fff">
+      <path d="M0 60h480M0 120h480M0 180h480M0 240h480M80 0v300M160 0v300M240 0v300M320 0v300M400 0v300"/>
+    </g>
+
+    <!-- website -->
+    <g class="float">
+      <rect x="34" y="40" width="270" height="200" rx="14" fill="#FBF6EE"/>
+      <rect x="34" y="40" width="270" height="26" rx="14" fill="#EFE6D6"/>
+      <rect x="34" y="56" width="270" height="10" fill="#EFE6D6"/>
+      <circle cx="50" cy="53" r="4" fill="#FF5F57"/><circle cx="63" cy="53" r="4" fill="#FEBC2E"/><circle cx="76" cy="53" r="4" fill="#28C840"/>
+      <rect x="52" y="84" width="46" height="9" rx="3" fill="#2A2118"/>
+      <rect x="200" y="86" width="22" height="5" rx="2.5" fill="#2A2118" opacity=".25"/>
+      <rect x="228" y="86" width="22" height="5" rx="2.5" fill="#2A2118" opacity=".25"/>
+      <rect x="256" y="83" width="32" height="12" rx="6" fill="#F5A524"/>
+      <text x="52" y="128" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="800" font-size="19" fill="#2A2118">Grow online,</text>
+      <text x="52" y="150" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="800" font-size="19" fill="#2A2118">faster.</text>
+      <rect x="52" y="162" width="130" height="6" rx="3" fill="#2A2118" opacity=".18"/>
+      <rect x="52" y="174" width="96" height="6" rx="3" fill="#2A2118" opacity=".18"/>
+      <rect x="52" y="192" width="74" height="22" rx="11" fill="#2A2118"/>
+      <text x="89" y="207" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="700" font-size="9" fill="#FBF6EE">Get a quote</text>
+      <g class="cursor">
+        <path d="M150 226l0 18 5-5 4 9 4-2-4-9 7 0z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/>
+      </g>
+    </g>
+
+    <!-- growth card -->
+    <g class="float2">
+      <rect x="262" y="128" width="184" height="138" rx="14" fill="#151922" stroke="#2C3342"/>
+      <text x="280" y="152" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="10" fill="#9AA1AE">Monthly enquiries</text>
+      <text x="280" y="174" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="800" font-size="18" fill="#EEF0F4">Trending up</text>
+      <rect class="b" x="282" y="214" width="18" height="36" rx="4" fill="url(#bar)" opacity=".45"/>
+      <rect class="b b2" x="310" y="204" width="18" height="46" rx="4" fill="url(#bar)" opacity=".6"/>
+      <rect class="b b3" x="338" y="196" width="18" height="54" rx="4" fill="url(#bar)" opacity=".75"/>
+      <rect class="b b4" x="366" y="186" width="18" height="64" rx="4" fill="url(#bar)" opacity=".9"/>
+      <rect class="b b5" x="394" y="172" width="18" height="78" rx="4" fill="url(#bar)"/>
+      <path class="trend" d="M282 226 L320 214 L348 206 L376 194 L412 176 L428 166" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- notification -->
+    <g class="float">
+      <rect x="300" y="34" width="150" height="48" rx="12" fill="#151922" stroke="#2C3342"/>
+      <circle cx="322" cy="58" r="11" fill="#1F3B30"/>
+      <circle class="ping" cx="322" cy="58" r="4" fill="#34D399"/>
+      <circle cx="322" cy="58" r="4" fill="#34D399"/>
+      <text x="340" y="55" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="700" font-size="11" fill="#EEF0F4">New enquiry</text>
+      <text x="340" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="9.5" fill="#9AA1AE">from your website</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" role="img" aria-label="Design canvas with a pen drawing a layout">
+  <style>
+    .curve { stroke-dasharray: 160; animation: draw 3.2s ease-in-out infinite; }
+    @keyframes draw { 0% { stroke-dashoffset: 160; } 55%, 100% { stroke-dashoffset: 0; } }
+    .pen { animation: pen 3.2s ease-in-out infinite; }
+    @keyframes pen { 0% { transform: translate(0, 0); } 55%, 100% { transform: translate(96px, -30px); } }
+    .sw { animation: sw 3.2s steps(1) infinite; }
+    @keyframes sw { 0% { fill: #F5A524; } 33% { fill: #FF6B3D; } 66% { fill: #34D399; } }
+  </style>
+  <rect x="8" y="8" width="144" height="94" rx="10" fill="#1A1E27" stroke="#2C3342"/>
+  <g stroke="#2C3342"><path d="M8 32h144M44 8v94"/></g>
+  <rect x="14" y="40" width="22" height="22" rx="5" class="sw"/>
+  <rect x="14" y="68" width="22" height="6" rx="3" fill="#6D7891"/>
+  <rect x="14" y="80" width="16" height="6" rx="3" fill="#6D7891"/>
+  <circle cx="20" cy="20" r="4" fill="#FF5F57"/><circle cx="32" cy="20" r="4" fill="#FEBC2E"/>
+  <rect x="56" y="44" width="40" height="40" rx="8" fill="none" stroke="#9AA1AE" stroke-dasharray="4 4"/>
+  <path class="curve" d="M54 90 C 80 40, 110 100, 146 56" fill="none" stroke="#F5A524" stroke-width="3" stroke-linecap="round"/>
+  <g class="pen">
+    <path d="M50 92l4-12 18-18 8 8-18 18z" fill="#EEF0F4"/>
+    <path d="M50 92l4-12 8 8z" fill="#F5A524"/>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" role="img" aria-label="Code editor with lines being written">
+  <style>
+    .l { transform-box: fill-box; transform-origin: 0 50%; animation: type 3s steps(12) infinite; }
+    .l2 { animation-delay: .35s; } .l3 { animation-delay: .7s; } .l4 { animation-delay: 1.05s; } .l5 { animation-delay: 1.4s; }
+    @keyframes type { 0% { transform: scaleX(0); } 45%, 100% { transform: scaleX(1); } }
+    .caret { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .bar { transform-box: fill-box; transform-origin: 0 50%; animation: load 3s ease-in-out infinite; }
+    @keyframes load { 0% { transform: scaleX(.05); } 80%, 100% { transform: scaleX(1); } }
+  </style>
+  <rect x="8" y="8" width="144" height="94" rx="10" fill="#0D1016" stroke="#2C3342"/>
+  <circle cx="20" cy="20" r="4" fill="#FF5F57"/><circle cx="32" cy="20" r="4" fill="#FEBC2E"/><circle cx="44" cy="20" r="4" fill="#28C840"/>
+  <g font-family="Consolas, Menlo, monospace" font-size="8" fill="#4B5466">
+    <text x="16" y="42">1</text><text x="16" y="54">2</text><text x="16" y="66">3</text><text x="16" y="78">4</text>
+  </g>
+  <rect class="l" x="28" y="37" width="60" height="6" rx="3" fill="#F5A524"/>
+  <rect class="l l2" x="36" y="49" width="84" height="6" rx="3" fill="#6D7891"/>
+  <rect class="l l3" x="36" y="61" width="50" height="6" rx="3" fill="#34D399"/>
+  <rect class="l l4" x="28" y="73" width="70" height="6" rx="3" fill="#6D7891"/>
+  <rect class="caret" x="102" y="72" width="2" height="9" fill="#EEF0F4"/>
+  <rect x="28" y="88" width="112" height="5" rx="2.5" fill="#1F2430"/>
+  <rect class="bar" x="28" y="88" width="112" height="5" rx="2.5" fill="#34D399"/>
+</svg>

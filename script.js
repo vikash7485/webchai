@@ -95,8 +95,28 @@
     });
   }
 
+  /* ---------- Founder quote: split into words ---------- */
+  document.querySelectorAll('.quote-words p').forEach((p) => {
+    const words = p.textContent.trim().split(/\s+/);
+    p.setAttribute('aria-label', p.textContent.trim());
+    p.textContent = '';
+    words.forEach((word, i) => {
+      const span = document.createElement('span');
+      span.className = 'w';
+      span.setAttribute('aria-hidden', 'true');
+      span.style.setProperty('--wi', i);
+      span.textContent = i < words.length - 1 ? word + ' ' : word;
+      p.appendChild(span);
+    });
+  });
+
+  /* ---------- Auto-stagger groups without explicit delays ---------- */
+  document.querySelectorAll('.faq').forEach((group) => {
+    [...group.children].forEach((el, i) => el.style.setProperty('--d', `${(i * 0.07).toFixed(2)}s`));
+  });
+
   /* ---------- Reveal on scroll ---------- */
-  const reveals = document.querySelectorAll('.reveal');
+  const reveals = document.querySelectorAll('.reveal, .footer-word');
   if (!hasIO || reduceMotion) {
     reveals.forEach((el) => el.classList.add('is-visible'));
   } else {

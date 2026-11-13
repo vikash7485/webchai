@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" role="img" aria-label="Chat bubbles: discussing the project">
+  <style>
+    .in1 { animation: pop 4s ease-out infinite; transform-box: fill-box; transform-origin: 0 100%; }
+    .in2 { animation: pop 4s ease-out .6s infinite; transform-box: fill-box; transform-origin: 100% 100%; }
+    @keyframes pop { 0% { transform: scale(.4); opacity: 0; } 12%, 85% { transform: scale(1); opacity: 1; } 100% { opacity: 0; } }
+    .dot { animation: dot 1.2s ease-in-out infinite; }
+    .d2 { animation-delay: .15s; } .d3 { animation-delay: .3s; }
+    @keyframes dot { 0%, 60%, 100% { transform: translateY(0); opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
+  </style>
+  <g class="in1">
+    <path d="M14 18h80a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10H34l-14 10v-10h-6a10 10 0 0 1-10-10V28a10 10 0 0 1 10-10z" fill="#252B37"/>
+    <rect x="18" y="31" width="64" height="6" rx="3" fill="#9AA1AE"/>
+    <rect x="18" y="43" width="44" height="6" rx="3" fill="#9AA1AE" opacity=".6"/>
+  </g>
+  <g class="in2">
+    <path d="M66 58h80a10 10 0 0 1 10 10v16a10 10 0 0 1-10 10h-6v10l-14-10H66a10 10 0 0 1-10-10V68a10 10 0 0 1 10-10z" fill="#F5A524"/>
+    <circle class="dot" cx="88" cy="76" r="4" fill="#1A1205"/>
+    <circle class="dot d2" cx="102" cy="76" r="4" fill="#1A1205"/>
+    <circle class="dot d3" cx="116" cy="76" r="4" fill="#1A1205"/>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110" role="img" aria-label="Rocket launching">
+  <style>
+    .rocket { animation: lift 2.4s ease-in-out infinite; }
+    @keyframes lift { 50% { transform: translateY(-8px); } }
+    .flame { transform-box: fill-box; transform-origin: 50% 0; animation: flame .25s ease-in-out infinite alternate; }
+    @keyframes flame { to { transform: scaleY(1.35); } }
+    .star { animation: fall 1.6s linear infinite; }
+    .s2 { animation-delay: -.5s; } .s3 { animation-delay: -1s; } .s4 { animation-delay: -1.3s; }
+    @keyframes fall { from { transform: translateY(-20px); opacity: 0; } 20% { opacity: 1; } to { transform: translateY(110px); opacity: 0; } }
+  </style>
+  <rect x="8" y="8" width="144" height="94" rx="10" fill="#141824" stroke="#2C3342"/>
+  <g stroke="#9AA1AE" stroke-width="2" stroke-linecap="round">
+    <path class="star" d="M30 14v10"/><path class="star s2" d="M126 10v14"/><path class="star s3" d="M50 6v8"/><path class="star s4" d="M110 4v10"/>
+  </g>
+  <g class="rocket">
+    <path class="flame" d="M74 78h12l-6 18z" fill="#FF6B3D"/>
+    <path class="flame" d="M76.5 78h7l-3.5 10z" fill="#FFC34D"/>
+    <path d="M80 20c10 8 13 24 10 42l-4 16h-12l-4-16c-3-18 0-34 10-42z" fill="#EEF0F4"/>
+    <circle cx="80" cy="44" r="6" fill="#0EA5E9" stroke="#1A1E27" stroke-width="2"/>
+    <path d="M70 58l-10 10v10l12-6zM90 58l10 10v10l-12-6z" fill="#F5A524"/>
+  </g>
+</svg>

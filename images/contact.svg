@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 180" role="img" aria-label="Paper plane flying towards a message">
+  <style>
+    .trail { stroke-dasharray: 3 9; animation: flow 1.2s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -24; } }
+    .plane { offset-path: path("M20 150 C 110 150, 120 40, 220 70 S 330 120, 370 40"); offset-rotate: auto; animation: fly 5s cubic-bezier(.45,0,.35,1) infinite; }
+    @keyframes fly { 0% { offset-distance: 0%; opacity: 0; } 8% { opacity: 1; } 88% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+    .bubble { transform-box: fill-box; transform-origin: 0 100%; animation: pop 5s ease-out infinite; }
+    @keyframes pop { 0%, 80% { transform: scale(.6); opacity: 0; } 88%, 100% { transform: scale(1); opacity: 1; } }
+  </style>
+  <path class="trail" d="M20 150 C 110 150, 120 40, 220 70 S 330 120, 370 40" fill="none" stroke="#F5A524" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+  <g class="plane">
+    <g transform="translate(-16 -12)">
+      <path d="M0 12 32 0 22 26 15 17z" fill="#F5A524"/>
+      <path d="M15 17 32 0 12 14z" fill="#FFC34D"/>
+      <path d="M15 17 14 24 19 20z" fill="#C67E0E"/>
+    </g>
+  </g>
+  <g class="bubble">
+    <rect x="352" y="6" width="58" height="26" rx="13" fill="#34D399"/>
+    <path d="M366 19l5 5 10-10" stroke="#0B2A1F" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="386" y="23" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="700" font-size="9" fill="#0B2A1F">Sent</text>
+  </g>
+</svg>
