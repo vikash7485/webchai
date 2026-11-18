@@ -7,24 +7,6 @@
 
   const WA_NUMBER = '919288270459';
 
-  /* ---------- Theme toggle ---------- */
-  const themeBtn = document.querySelector('.theme-toggle');
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-
-  const syncTheme = () => {
-    const isDark = root.dataset.theme !== 'light';
-    themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    if (themeMeta) themeMeta.setAttribute('content', isDark ? '#08090C' : '#FAFAF7');
-  };
-
-  themeBtn.addEventListener('click', () => {
-    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
-    root.dataset.theme = next;
-    try { localStorage.setItem('webchai-theme', next); } catch (e) { /* storage unavailable */ }
-    syncTheme();
-  });
-  syncTheme();
-
   /* ---------- Header, progress bar, floating WhatsApp ---------- */
   const header = document.querySelector('.site-header');
   const progress = document.querySelector('.scroll-progress');

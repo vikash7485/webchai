@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>WebChai | Web design &amp; white-label development studio</title>
   <meta name="description" content="WebChai is an independent web studio building fast, conversion-focused websites for businesses worldwide, and white-label WordPress development for agencies.">
-  <meta name="theme-color" content="#0A0B0F">
+  <meta name="theme-color" content="#FAFAF7">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="WebChai">
   <meta property="og:title" content="WebChai | Websites that win clients">
@@ -16,21 +16,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
 
   <script>
     (function () {
       var root = document.documentElement;
       root.classList.add('js');
-      var theme = 'dark';
-      try {
-        var saved = localStorage.getItem('webchai-theme');
-        if (saved === 'dark' || saved === 'light') theme = saved;
-      } catch (e) {}
-      root.setAttribute('data-theme', theme);
     })();
   </script>
-  <script src="script.js?v=4" defer></script>
+  <script src="script.js?v=7" defer></script>
 
   <script type="application/ld+json">
   {
@@ -112,10 +106,6 @@
       </nav>
 
       <div class="header-actions">
-        <button class="icon-btn theme-toggle" type="button" aria-label="Switch to light mode">
-          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
-          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
-        </button>
         <a class="btn btn-primary btn-sm header-cta magnetic" href="#contact">Start a project</a>
         <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
           <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
@@ -444,7 +434,7 @@
         <div class="work-grid">
           <article class="work-card spot reveal anim-rise">
             <a class="work-media work-media-pink" href="https://yuvashala-foundation.vercel.app" target="_blank" rel="noopener" aria-label="Open the Yuvashala Foundation website in a new tab">
-              <img src="images/yuvashala.svg" alt="Yuvashala Foundation website: pink and white design with a youth hero banner, sports ticker, Who We Are section and impact numbers" width="560" height="360" loading="lazy">
+              <img src="images/yuvashala-home.jpg" alt="Homepage of the Yuvashala Foundation website: header with logo, navigation and pink Donate button over a full-width video of a community event" width="1440" height="900" loading="lazy">
             </a>
             <div class="work-body">
               <p class="case-cat">Non-profit · Foundation website</p>
@@ -459,12 +449,12 @@
 
           <article class="work-card spot reveal anim-rise" style="--d:.15s">
             <a class="work-media work-media-stadium" href="https://sos-soccer.vercel.app" target="_blank" rel="noopener" aria-label="Open the School of Soccer website in a new tab">
-              <img src="images/school-of-soccer.svg" alt="School of Soccer website: night stadium hero with the headline Learn. Play. Grow with football, admissions bar and yellow Join Now buttons" width="560" height="360" loading="lazy">
+              <img src="images/school-of-soccer-home.jpg" alt="Homepage of the School of Soccer website: header with logo, navigation and Join Now button over drone footage of players on the academy ground" width="1440" height="900" loading="lazy">
             </a>
             <div class="work-body">
               <p class="case-cat">Sports academy · Website</p>
               <h3>School of Soccer</h3>
-              <p>A bold, stadium-style website for a football academy in Samastipur, running since 2009. Training programs by age group, a 60-second batch-finder quiz, the founder's story and one-tap admission enquiries.</p>
+              <p>A website for a football academy in Samastipur, running since 2009, that opens with drone footage of its home ground. Training programs by age group, a 60-second batch-finder quiz, the founder's story and one-tap admission enquiries.</p>
               <ul class="chips">
                 <li>Training programs</li><li>Batch-finder quiz</li><li>English / हिंदी</li><li>WhatsApp enquiries</li>
               </ul>
