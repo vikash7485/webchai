@@ -1547,3 +1547,191 @@ html:not(.js) .case-visual::after { transform: scaleY(0); }
 
 .work-body .link-arrow { margin-top: 4px; }
 .work-media:focus-visible { outline-offset: -4px; }
+
+/* =========================================================
+   Clients roster + photo gallery
+   ========================================================= */
+.showcase { padding: 64px 0 40px; overflow: hidden; }
+.clients {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 40px;
+  flex-wrap: wrap;
+  padding-bottom: 48px;
+}
+.clients-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.clients-list { display: flex; flex-wrap: wrap; gap: 14px 44px; }
+.clients-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+  transition: color .3s;
+}
+.clients-list li:hover { color: var(--text); }
+.cl-mark {
+  display: grid;
+  place-items: center;
+  width: 30px; height: 30px;
+  border-radius: 9px;
+  font-size: 14px;
+  color: #fff;
+}
+.cl-gold { background: linear-gradient(135deg, #C9A04F, #8A6424); font-family: var(--font-serif); font-style: italic; font-size: 18px; }
+.cl-pink { background: #E72175; }
+.cl-dark { background: #0B0B0F; color: #F5B700; }
+
+.gallery { display: grid; gap: 16px; }
+.gallery-row {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+.gallery-row[data-speed="1"] { margin-left: -220px; }
+.gallery figure {
+  margin: 0;
+  width: clamp(220px, 26vw, 380px);
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.gallery-row[data-speed="1"] figure:nth-child(odd) { aspect-ratio: 16 / 10; width: clamp(240px, 30vw, 440px); }
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 1.2s var(--ease-out), filter .6s;
+  filter: saturate(.9);
+}
+.gallery figure:hover img { transform: scale(1.14); filter: saturate(1.1); }
+
+/* =========================================================
+   Studio
+   ========================================================= */
+.studio-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.studio h2 { font-size: clamp(34px, 4.6vw, 54px); }
+.studio-photo {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  box-shadow: var(--shadow-lg);
+}
+.studio-photo img { width: 100%; height: 100%; object-fit: cover; }
+.studio-badge {
+  position: absolute;
+  left: 18px; bottom: 18px; right: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 14px;
+  font-weight: 600;
+  color: #0E1015;
+}
+.studio-points { display: grid; gap: 4px; margin-top: 32px; }
+.studio-points li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.studio-points strong { font-family: var(--font-head); font-size: 18px; }
+.studio-points span { color: var(--muted); }
+
+/* Studio photo: unveils from the bottom while the image settles */
+.js .reveal.anim-curtain-img {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(100% 0 0 0 round 26px);
+  transition: clip-path 1.3s cubic-bezier(.77, 0, .18, 1);
+}
+.js .reveal.anim-curtain-img.is-visible { clip-path: inset(0 0 0 0 round 26px); }
+.js .anim-curtain-img img { transform: scale(1.25); transition: transform 1.8s var(--ease-out); }
+.js .anim-curtain-img.is-visible img { transform: scale(1); }
+.js .anim-curtain-img .studio-badge { opacity: 0; transform: translateY(16px); transition: opacity .6s 1s, transform .8s var(--ease-out) 1s; }
+.js .anim-curtain-img.is-visible .studio-badge { opacity: 1; transform: none; }
+
+/* =========================================================
+   CTA band with photo
+   ========================================================= */
+.cta-band {
+  position: relative;
+  margin-top: 24px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 340px;
+  display: grid;
+  align-items: center;
+  isolation: isolate;
+}
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  transform: scale(1.1);
+  transition: transform 2s var(--ease-out);
+}
+.cta-band.is-visible .cta-bg { transform: scale(1); }
+.cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg, rgba(10, 11, 15, .88) 30%, rgba(10, 11, 15, .45) 70%, rgba(245, 165, 36, .25));
+}
+.cta-content { padding: 56px; max-width: 620px; color: #fff; display: grid; gap: 14px; justify-items: start; }
+.cta-content .eyebrow { color: #F7B547; margin: 0; }
+.cta-content h3 { font-size: clamp(30px, 4vw, 46px); }
+.cta-content .serif { color: #F7B547; }
+.cta-content p:not(.eyebrow) { color: rgba(255, 255, 255, .75); font-size: 17px; }
+.cta-content .btn { margin-top: 10px; }
+
+@media (max-width: 960px) {
+  .studio-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 680px) {
+  .showcase { padding: 48px 0 24px; }
+  .clients { padding-bottom: 32px; }
+  .clients-list li { font-size: 16px; }
+  .studio-points li { grid-template-columns: 1fr; gap: 4px; }
+  .cta-content { padding: 36px 22px; }
+  .cta-band { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-row { transform: none !important; }
+  .js .reveal.anim-curtain-img { clip-path: none !important; }
+}
+/* Zero-size marker that triggers clip-path reveals (see script.js) */
+.reveal-proxy { position: absolute; width: 1px; height: 1px; pointer-events: none; }
+/* Keep decorative overhangs (tilted phone, glows) from widening the page on phones */
+main, .site-footer { overflow-x: clip; }

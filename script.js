@@ -102,15 +102,29 @@
   if (!hasIO || reduceMotion) {
     reveals.forEach((el) => el.classList.add('is-visible'));
   } else {
+    // Clip-path reveals start fully clipped, which IntersectionObserver treats as
+    // invisible, so those are triggered by watching an unclipped proxy instead.
+    const proxies = new Map();
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+          (proxies.get(entry.target) || [entry.target]).forEach((el) => el.classList.add('is-visible'));
           obs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    reveals.forEach((el) => io.observe(el));
+    reveals.forEach((el) => {
+      if (el.matches('.anim-wipe, .anim-curtain-img')) {
+        const proxy = document.createElement('span');
+        proxy.className = 'reveal-proxy';
+        proxy.setAttribute('aria-hidden', 'true');
+        el.before(proxy);
+        proxies.set(proxy, [el]);
+        io.observe(proxy);
+      } else {
+        io.observe(el);
+      }
+    });
   }
 
   /* ---------- Hero browser: cycles through example sites ---------- */
@@ -341,6 +355,28 @@
     if (win) win.opener = null;
     else window.location.href = url;
   });
+
+  /* ---------- Photo gallery: rows drift in opposite directions on scroll ---------- */
+  const galleryRows = document.querySelectorAll('.gallery-row');
+  if (galleryRows.length && !reduceMotion) {
+    const gallery = galleryRows[0].parentElement;
+    let gTicking = false;
+    const moveGallery = () => {
+      const r = gallery.getBoundingClientRect();
+      const progress = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+      if (progress > -0.2 && progress < 1.2) {
+        galleryRows.forEach((row) => {
+          const dir = Number(row.dataset.speed) || 1;
+          row.style.transform = `translate3d(${(progress - 0.5) * 240 * dir}px, 0, 0)`;
+        });
+      }
+      gTicking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!gTicking) { gTicking = true; requestAnimationFrame(moveGallery); }
+    }, { passive: true });
+    moveGallery();
+  }
 
   /* ---------- Footer year ---------- */
   const year = document.getElementById('year');
