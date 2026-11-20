@@ -378,6 +378,55 @@
     moveGallery();
   }
 
+  /* ---------- Installable app (PWA) ---------- */
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => { /* install still works as a shortcut */ });
+    });
+  }
+
+  const appCard = document.getElementById('get-app');
+  if (appCard) {
+    const installBtn = appCard.querySelector('[data-install]');
+    const hint = appCard.querySelector('[data-install-hint]');
+    const ua = navigator.userAgent;
+    const isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    let deferredPrompt = null;
+
+    const showInstalled = () => {
+      installBtn.hidden = true;
+      appCard.classList.add('is-installed');
+      hint.textContent = '✓ WebChai is installed on this device.';
+    };
+
+    if (isStandalone) {
+      showInstalled();
+    } else if (isIOS) {
+      hint.innerHTML = 'On iPhone or iPad: tap <svg class="icon" aria-hidden="true"><use href="#i-share"/></svg> <strong>Share</strong>, then <strong>Add to Home Screen</strong>.';
+    } else {
+      hint.innerHTML = 'Open your browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.';
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.hidden = false;
+      hint.textContent = '';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if (choice.outcome === 'accepted') showInstalled();
+      else installBtn.hidden = false;
+    });
+
+    window.addEventListener('appinstalled', showInstalled);
+  }
+
   /* ---------- Footer year ---------- */
   const year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());

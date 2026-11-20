@@ -12,12 +12,16 @@
   <meta property="og:description" content="Conversion-focused websites for businesses worldwide, and white-label web development for agencies.">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="WebChai">
 
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=10">
+  <link rel="stylesheet" href="styles.css?v=11">
 
   <script>
     (function () {
@@ -25,7 +29,7 @@
       root.classList.add('js');
     })();
   </script>
-  <script src="script.js?v=9" defer></script>
+  <script src="script.js?v=11" defer></script>
 
   <script type="application/ld+json">
   {
@@ -45,6 +49,8 @@
 
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M7 11H5.5A1.5 1.5 0 0 0 4 12.5v7A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5v-7a1.5 1.5 0 0 0-1.5-1.5H17"/></symbol>
     <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
@@ -733,6 +739,21 @@
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
+    </div>
+    <div class="container">
+      <div class="app-card" id="get-app">
+        <img class="app-icon" src="icons/icon-192.png" alt="" width="64" height="64" loading="lazy">
+        <div class="app-copy">
+          <h2 class="app-title">Get the WebChai app</h2>
+          <p class="app-text" data-app-text>Install WebChai on your phone or computer for one-tap access. It's free, light and works offline.</p>
+        </div>
+        <div class="app-actions">
+          <button class="btn btn-primary btn-lg" type="button" data-install hidden>
+            <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg> Install app
+          </button>
+          <p class="app-hint" data-install-hint></p>
+        </div>
+      </div>
     </div>
     <div class="container footer-word" aria-hidden="true">WebChai</div>
     <div class="container footer-bottom">

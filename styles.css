@@ -1735,3 +1735,44 @@ html:not(.js) .case-visual::after { transform: scaleY(0); }
 .reveal-proxy { position: absolute; width: 1px; height: 1px; pointer-events: none; }
 /* Keep decorative overhangs (tilted phone, glows) from widening the page on phones */
 main, .site-footer { overflow-x: clip; }
+
+/* =========================================================
+   Install app card (footer)
+   ========================================================= */
+.app-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  margin-top: 56px;
+  padding: 26px 28px;
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 140% at 100% 0%, var(--glow), transparent 55%),
+    var(--surface);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  box-shadow: var(--shadow);
+}
+.app-icon {
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px -10px rgba(245, 165, 36, .7);
+  animation: appBob 4s ease-in-out infinite;
+}
+@keyframes appBob { 50% { transform: translateY(-4px) rotate(-3deg); } }
+.app-title { font-size: clamp(20px, 2.2vw, 24px); margin-bottom: 4px; }
+.app-text { color: var(--muted); font-size: 15px; max-width: 520px; }
+.app-actions { display: grid; justify-items: end; gap: 8px; }
+.app-hint { font-size: 14px; color: var(--muted); text-align: right; max-width: 300px; }
+.app-hint:empty { display: none; }
+.app-hint .icon { display: inline; vertical-align: -3px; width: 16px; height: 16px; color: var(--accent-text); }
+.app-hint strong { color: var(--text); }
+.app-card.is-installed .app-hint { color: #047857; font-weight: 600; }
+
+@media (max-width: 760px) {
+  .app-card { grid-template-columns: auto 1fr; padding: 22px 20px; gap: 16px 18px; }
+  .app-actions { grid-column: 1 / -1; justify-items: stretch; }
+  .app-actions .btn { width: 100%; }
+  .app-hint { text-align: left; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) { .app-icon { animation: none; } }
